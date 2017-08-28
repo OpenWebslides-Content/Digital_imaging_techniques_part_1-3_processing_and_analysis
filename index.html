@@ -28,6 +28,18 @@
 			<li> Image Analysis: image in -> measurements out</li>
 			<li>Image Understanding: image in ->high-level description out</li>
 		</ul>
+		<p data-view-type="course">Modern digital technology has made it possible to manipulate multi-dimensional signals. The goal of this manipulation can
+			be divided into three categories:</p>
+		<ul data-view-type="course">
+			<li>Image Processing image in -> image out</li>
+			<li>Image Analysis image in -> measurements out</li>
+			<li>Image Understanding image in -> high-level description out</li>
+		</ul>
+		<p data-view-type="course">We will first focus on some fundamental concepts of image processing. Then some introduction on image analysis will be
+			given. Image understanding should be the aim of using different imaging techniques and requires a lot of expertise and
+			experience. In this chapter we will restrict ourselves to two–dimensional (2D) image processing and 2D image analysis,
+			although most of the concepts and techniques that are to be described can be extended easily to three dimensions (see
+			Chapter on X-ray CT and Morpho+). </p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -37,6 +49,14 @@
 			<li>improving the visual appearance of images to a human observer, including their printing and transmission.</li>
 			<li>preparing images for the measurement of the features and structures which they reveal.</li>
 		</ol>
+		<p data-view-type="course">Image processing is used in a wide variety of applications, for two different purposes:</p>
+		<ol data-view-type="course">
+			<li>improving the visual appearance of images to a human observer, including their printing and transmission.</li>
+			<li>preparing images for the measurement of the features and structures which they reveal.</li>
+		</ol>
+		<p data-view-type="course">The techniques that are appropriate for each of these tasks are not always the same, but there is considerable overlap.
+			We will briefly discuss some aspects of image processing. For more detail we can refer to the book of John Russ “The imaging
+			processing handbook”. </p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -49,6 +69,13 @@
 				by optimizing/correcting the acquisition process in the first place. (of course not always possible to obtain a perfect
 				digital image in reality).</li>
 		</ul>
+		<p data-view-type="course">A first group of image processing operations are those procedures applied to correct some of the defects in acquired images
+			that may be present due to imperfect detectors, limitations of the optics, inadequate or non-uniform illumination or an
+			undesirable viewpoint. It is important to emphasize that these corrections are applied after the image has been digitized
+			and stored and therefore are unable to deliver the highest quality result that can be achieved by optimizing or correcting
+			the acquisition process in the first place. Of course, it is not always possible to obtain a perfect digital image in
+			reality.
+		</p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -80,6 +107,13 @@
 		</ul>
 		<p>In many situations: recorded image has a much smaller range of brightness values, which may either lie in middle of the
 			range (intermediate gray values) or toward either the bright or dark end of the range.</p>
+		<p data-view-type="course"><strong>Contrast expansion</strong></p>
+		<p data-view-type="course">We have already seen that the typical digitization process for images produces values from 0 (black) to 255 (white), producing
+			one byte (8 bit) values, or for colour images one byte each for red, green, and blue. If the camera and digitizer have
+			more precision, the values may have 10, 12, or even more bits of precision and typically occupy two bytes each. But while
+			this is the full dynamic range available to the output of the camera sensors, there is no reason that the actual image
+			data must cover the full range. In many situations the recorded image has a much smaller range of brightness values, which
+			may either lie in the middle of the range (intermediate gray values) or toward either the bright or dark end of the range.</p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -96,6 +130,9 @@
 			<img src="assets/Afbeelding4.png" alt="histogram of the grey value image">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">The image histogram, a plot of the number of pixels with each possible brightness level, is a valuable tool for examining
+			the contrast in the image. Figure 16 shows an example image in which the histogram covers the full dynamic range and indicates
+			good contrast. There are no pixels that are completely black or white. </p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -106,6 +143,13 @@
 			<img src="assets/Afbeelding5.png" alt="grey value image with corresponding histogram, original">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">If the inherent range of variation in brightness of the image is much smaller than the dynamic range of the camera, subsequent
+			electronics, and digitizer, then the actual range of numbers is much less than the full range of 0 through 255. Figure
+			17 shows such an example. </p>
+		<p data-view-type="course">The specimen in Fig. 17 is a thin section through tissue, shown in a bright field microscope. Illumination in the microscope
+			and light staining of the section produce very little total contrast. The narrow peak and empty regions at the ends of
+			the histogram indicate that many of the possible brightness levels are not used.</p>
+
 	</section>
 
 	<section class="slide" data-level="0">
@@ -116,6 +160,8 @@
 			<img src="assets/Afbeelding6.png" alt="grey value image with corresponding histogram, linear expansion">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">. Visibility of the structures present can be improved by stretching the contrast so that the values of pixels are reassigned
+			to cover the entire available range. Figure 17b shows this.</p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -127,6 +173,9 @@
 			<img src="assets/Afbeelding6.png" alt="grey value image with corresponding histogram, linear expansion">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">The mapping is linear and one-to-one. This means that the darkest pixels in the original image are assigned to black, the
+			lightest pixels are assigned to white, and intermediate gray values in the original image are given new values which are
+			linearly interpolated between black and white.</p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -138,8 +187,14 @@
 			subtle variations in gray scale that are not recorded in original image. </p>
 		<figure>
 			<img src="assets/Afbeelding6a.png" alt="grey value image with corresponding histogram, original and linear expansion">
-			<figcaption></figcaption>
+			<figcaption>fig. 17</figcaption>
 		</figure>
+		<p data-view-type="course">All of the pixels which have one gray value in the original image are assigned the same new gray value in the resulting
+			image. This histogram plotted with the image in the figure now shows counts of pixels for gray levels that are spread
+			out across the available brightness scale. However, many of the gray values still show zero counts in the histogram, indicating
+			that no pixels have those values. The reassignment of gray values has increased the visual contrast for the pixels present,
+			but has not increased the ability to discriminate subtle variations in gray scale that are not recorded in the original
+			image. It has also magnified the brightness differences associated with noise in the original image.</p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -150,12 +205,33 @@
 			<img src="assets/Afbeelding6b.png" alt="grey value image with corresponding histogram, better acquisition">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">Figure 17c shows the same field of view acquired utilizing the entire range of the camera and digitizer. This may require
+			adjusting the illumination, camera gain, or exposure time, etc., and may require trial and error in the settings, which
+			are simplified if a live histogram can be shown. The mean brightness of various structures is similar to that shown in
+			Figure 17b. However, all of the 256 possible gray values are now present in the image, and small variations in sample
+			density can now be distinguished</p>
+		<p data-view-type="course">However, it is often not practical to adjust the illumination, camera gain, etc., to exactly fill the available pixel depth
+			(the number of gray levels that can be digitized or stored). Furthermore, increasing the brightness range too much can
+			cause pixel values at the dark and/or light ends of the range to exceed the digitization and storage capacity and to be
+			clipped to the limiting values, which also causes loss of information. Figure 18 shows an example, a night scene in which
+			the brightness scale of the face of the building is good but bright lights are brighter than the white limit of the camera
+			and consequently are clipped to the maximum value of 255, while the dark areas around the building are underexposed and
+			clipped to zero (black), losing any detail that might have been present.</p>
+		<figure>
+			<img src="assets/k1.png" alt="FIGURE 18: A night scene in which the bright lights are clipped to white and the shadows are clipped to black. Information lost due to clipping cannot be recovered.">
+			<figcaption>FIGURE 18: A night scene in which the bright lights are clipped to white and the shadows are clipped to black. Information
+				lost due to clipping cannot be recovered.</figcaption>
+		</figure>
 	</section>
 
 	<section class="slide" data-level="0">
 		<h1>Image processing: what about noisy images?</h1>
 		<p>linear expansion of contrast often accompanied by increased visibility for noise that may be present.</p>
 		<p>Noise: important defect in images that can take many different forms and arise from various sources. </p>
+		<p data-view-type="course"><strong>Noisy images</strong></p>
+		<p data-view-type="course">The linear expansion of contrast shown in the examples above is often accompanied by an increased visibility for noise
+			(random fluctuations in pixel values) that may be present. Noise is an important defect in images that can take many different
+			forms and arise from various sources.</p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -182,6 +258,7 @@
 	<section class="slide" data-level="0">
 		<h1>Image processing: what about noisy images?</h1>
 		<p>It is possible to improve in image quality (technically, signal to-noise ratio) by averaging a number of frames.</p>
+		<p data-view-type="course">It is possible to improve in image quality (technically, signal to-noise ratio) by averaging a number of frames. </p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -202,6 +279,14 @@
 			<li>due to instability in the light source or detector during the time required to scan or digitize an image.
 			</li>
 		</ul>
+		<p data-view-type="course">However, one unavoidable source of noise is counting statistics in the image detector due to a small number of incident
+			particles (photons, electrons, etc.). Noisy images may also occur due to instability in the light source or detector during
+			the time required to scan or digitize an image. The pattern of this noise may be different from the essentially Gaussian
+			noise due to counting statistics, but it still shows up as a variation in brightness in uniform regions of the scene.
+		</p>
+		<p data-view-type="course">When the noise has a characteristic that is not random in time and does not exhibit “normal” statistical behaviour, it
+			is more difficult to place meaningful numeric descriptors on the amount of noise. However, many of the same techniques
+			can be used, usually with somewhat less efficacy, to reduce the noise.</p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -212,6 +297,15 @@
 			<li>Staring mode: using a camera that can integrate the charge internally before it is read out. ( often used in astronomy,
 				fluorescence microscopy, and other applications with very faint images); the camera is open to the incident light.</li>
 		</ul>
+		<p data-view-type="course">Assuming that an image represents the best quality that can practically be obtained, we will focus on ways to suppress
+			noise to improve the ability to visualize and demarcate for measurement the features which are present. The underlying
+			assumptions in all of these methods are that the pixels in the image are much smaller than any of the important details,
+			and that for most of the pixels present, their neighbours represent the same structure. Various averaging and comparison
+			methods can be applied based on these assumptions.</p>
+		<p data-view-type="course">There are important differences between noise reduction by the use of frame averaging to combine many sequential readouts
+			from a camera and the use of a camera that can integrate the charge internally before it is read out. The latter mode
+			is employed in astronomy, fluorescence microscopy, and other applications with very faint images and is sometimes called
+			“staring” mode since the camera is open to the incident light. </p>
 	</section>
 
 	<section class="slide" data-level="0">
@@ -232,17 +326,32 @@
 		</ul>
 		<figure>
 			<img src="assets/Afbeelding7b.png" alt="SEM images of a scratched metal surface">
-			<figcaption></figcaption>
+			<figcaption>(Fig. 19)</figcaption>
+		</figure>
+		<p data-view-type="course">Figure 19 shows a comparison of two SEM images taken at different scan rates. The fast scan image collects few electrons
+			per pixel and so has a high random noise level that obscures details in the image. Slowing the scan rate down from 1 second
+			to 20 seconds increases the amount of signal and reduces the noise. The histograms show that the variation of brightness
+			within the uniform region is reduced (the peak is narrowed), which is why the visibility of detail is improved.</p>
+		<p data-view-type="course">Many digital cameras allow setting an equivalent ASA rating, corresponding to film sensitivity. The higher the ASA rating
+			the shorter the exposure and/or the smaller the aperture used to capture the image. This requires a higher gain in the
+			amplification of the signal, producing a higher level of random noise. Figure 20 shows the reduction of noise and improvement
+			in image quality with longer exposure time (achieved by reducing the ASA setting on the camera from 1600 to 100). The
+			noisy image in Figure 20a is also the starting point for various noise reduction methods shown below.</p>
+		<figure data-view-type="course">
+			<img src=" assets/k2.png " alt="Figure 20: Noise reduction by collecting more signal: (a) image recorded at ASA 1600 setting,
+			 1/800 second exposure; (b) same image recorded at ASA 100 setting, 1/50 second exposure. ">
+			<figcaption>Figure 20: Noise reduction by collecting more signal: (a) image recorded at ASA 1600 setting, 1/800 second exposure; (b)
+				same image recorded at ASA 100 setting, 1/50 second exposure.</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p>Besides frame averiging and longer exposure times</p>
 		<p>also image processing possible!</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p>We assume: the image represents the best quality that can be obtained. Underlying assumptions in all of the next methods
 			are:
@@ -254,72 +363,90 @@
 		<p>based on these assumptions, various averaging and comparison methods can be applied</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>neighbourhood averaging: </strong>simplest form of spatial averaging: to add together the pixel brightness values
 			in each small region of the image, divide by the number of pixels in the neighbourhood, and use the resulting value to
 			construct a new image.</p>
+		<p data-view-type="course"><strong>Neighbourhood averaging</strong></p>
+		<p data-view-type="course">The simplest form of spatial averaging is to add together the pixel brightness values in each small region of the image,
+			divide by the number of pixels in the neighbourhood, and use the resulting value to construct a new image. </p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>neighbourhood averaging: </strong></p>
 		<p>=> produces an image with a smaller number of pixels. (block size is 3×3 => 9 pixel values are added)</p>
 		<p>=> improvement in image quality or signal-to-noise ratio due to random noise is the square root of 9, or a factor of 3.</p>
 		<figure>
-			<img src="assets/Afbeelding7c.png" alt="example of neighbourhood averaging">
-			<figcaption></figcaption>
+			<img src="assets/Afbeelding7c.png " alt="example of neighbourhood averaging ">
+			<figcaption>(fig. 21a)</figcaption>
 		</figure>
+		<p data-view-type="course">Figure 21a shows that this essentially produces an image with a smaller number of pixels. The block size is 3 × 3, so that
+			nine pixel values are added. For the random noise in this image, the improvement in image quality or signal-to-noise ratio
+			is the square root of 9, or a factor of 3. </p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p>But: lateral resolution is seriously impacted and the small structures in the image can no longer be separated.</p>
 		<figure>
-			<img src="assets/Afbeelding7c.png" alt="example of neighbourhood averaging">
+			<img src="assets/Afbeelding7c.png " alt="example of neighbourhood averaging ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">However, the image lateral resolution is seriously impacted and the small structures in the image can no longer be separately
+			discerned.
+		</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p>The more common way to accomplish neighbourhood averaging is to replace each pixel with the average of itself and its neighbours</p>
 		<p>=> = a “kernel” operation or a convolution</p>
 		<figure>
-			<img src="assets/Afbeelding7d.png" alt="example of neighbourhood averaging by convolution">
+			<img src="assets/Afbeelding7d.png " alt="example of neighbourhood averaging by convolution ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">The more common way to accomplish neighbourhood averaging is to replace each pixel with the average of itself and its neighbours.
+			This is often described as a “kernel” operation, since implementation can be generalized as the sum of the pixel values
+			in the region multiplied by a set of integer weights. The process is also called a convolution.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p>Neighbourhood operations: usually applied symmetrically around each pixel</p>
 		<p>=> problem for pixels nearer to an image edge than the half-width of the neighbourhood. </p>
 		<figure>
-			<img src="assets/Afbeelding8.png" alt="example showing the kernel edge problem">
+			<img src="assets/Afbeelding8.png " alt="example showing the kernel edge problem ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding9.png" alt="example showing the kernel edge problem">
+			<img src="assets/Afbeelding9.png " alt="example showing the kernel edge problem ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">Neighbourhood operations, including kernel multiplication, are usually applied symmetrically around each pixel. This creates
+			a problem for pixels nearer to an edge of the image than the half-width of the neighbourhood.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p>Various approaches possible:</p>
 		<ul>
 			<li>special asymmetrical kernels or rules along edges or in corners, assuming that image edges are mirrors so that each line
 				of pixels within the image is duplicated beyond it</li>
 			<figure>
-				<img src="assets/Afbeelding10.png" alt="image illustrating special rules for kernels at image corners">
+				<img src="assets/Afbeelding10.png " alt="image illustrating special rules for kernels at image corners ">
 				<figcaption></figcaption>
 			</figure>
 			<li>extrapolating values from within image area to pixels beyond edge</li>
 		</ul>
+		<p data-view-type="course">Various approaches are used to deal with this problem, including designing special asymmetrical kernels or rules along
+			edges or in corners, assuming that the image edges are mirrors so that each line of pixels within the image is duplicated
+			beyond it, extrapolating values from within the image area to the pixels beyond the edge, or assuming that the image wraps
+			around so that the left edge and right edge, and the top and bottom edges, are continuous.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p>Various approaches possible:</p>
 		<ul>
@@ -330,9 +457,13 @@
 		<p>None of these approaches is entirely satisfactory; in general most processing operations sacrifice some info from image
 			borders.
 		</p>
+		<p data-view-type="course">An even simpler approach is sometimes used: the processing is restricted to that portion of the image where no edge conflicts
+			arise. This leaves lines of unprocessed pixels along the edges of the images, equal in width to the radius of the neighbourhood.
+			None of these approaches is entirely satisfactory, and in general most processing operations sacrifice some information
+			from the image borders.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>To reduce noise: </strong></p>
 		<p>Smoothing filters discussed before:</p>
@@ -341,9 +472,15 @@
 			<li>not true at edges and boundaries</li>
 		</ul>
 		<p>=> these filters produce blurring and shifting of edges</p>
+		<p data-view-type="course"><strong>Neighbourhood ranking</strong></p>
+		<p data-view-type="course">Smoothing filters do reduce random noise, but the underlying assumption is that all of the pixels in the neighbourhood
+			represent multiple samples of the same value, in other words that they all belong to the same structure or object. Clearly,
+			at edges and boundaries this is not true, and all of the smoothing filters shown above produce some blurring and shifting
+			of edges, which is undesirable.</p>
+
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>To reduce noise: </strong></p>
 		<p>The use of weighting kernels to average together pixels in a neighbourhood (convolution):</p>
@@ -353,9 +490,13 @@
 		</ul>
 		<p>Other processing operations that can be performed in neighbourhoods that also provide noise reduction:</p>
 		<p><strong>Neighbourhood ranking</strong></p>
+		<p data-view-type="course">The use of weighting kernels to average together pixels in a neighbourhood is a convolution operation. It is a linear operation
+			that uses all of the pixels in the neighbourhood, and in which no information is lost from the original image. There are
+			other processing operations that can be performed in neighbourhoods in the spatial domain that also provide noise reduction.
+			These are not linear and do not utilize or preserve all of the original data.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>Neighbourhood ranking:</strong></p>
 		<ul>
@@ -365,9 +506,19 @@
 			<li>median filter: excellent rejecter of certain common kinds of noise. If a pixel contains an extreme value, it is replaced
 				by a “reasonable” value, the median value in the neighbourhood.</li>
 		</ul>
+		<p data-view-type="course">The most widely used of these methods is based on ranking of the pixels in a neighbourhood according to brightness. Then
+			the median value in this ordered list can be used as the new value for the central pixel. As in the case of the kernel
+			operations, this is used to produce a new image and only the original pixel values are used in the ranking for the neighborhood
+			around each pixel.</p>
+		<p data-view-type="course">The median filter is an excellent rejecter of certain common kinds of noise, both random superimposed variations and “shot”
+			or impulse noise in which individual pixels are corrupted or missing from the image. If a pixel contains an extreme value,
+			it is replaced by a “reasonable” value, the median value in the neighborhood. This type of noise occurs in CMOS cameras
+			with “dead” transistors that have no output or “locked” ones that always put out maximum signals, and in interference
+			microscopes for points on a surface with a locally high slope that return no light, for example. Dust on scanned film
+			negatives also creates this image defect. </p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1></h1>
 		<div class='quiz'>
 			<p class='quiz-question'>The median filter replaces the center value in the window with the median of all the pixel values in the window. In the
@@ -379,31 +530,31 @@
 			</ol>
 		</div>
 		<figure>
-			<img src="assets/Afbeelding10a.png" alt="kernel with unfiltered values">
+			<img src="assets/Afbeelding10a.png " alt="kernel with unfiltered values ">
 			<figcaption>unfiltered values</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding10b.png" alt="kernel to be filled in">
+			<img src="assets/Afbeelding10b.png " alt="kernel to be filled in ">
 			<figcaption>median filtered</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1></h1>
 		<p class='quiz-question'>The median filter replaces the center value in the window with the median of all the pixel values in the window. In the
 			case below, we want to know the value after median filtering of a single 3x3 window of values.</p>
 		<figure>
-			<img src="assets/Afbeelding10a.png" alt="kernel with unfiltered values">
+			<img src="assets/Afbeelding10a.png " alt="kernel with unfiltered values ">
 			<figcaption>unfiltered values</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding10c.png" alt="kernel to be filled in">
+			<img src="assets/Afbeelding10c.png " alt="kernel to be filled in ">
 			<figcaption>median filtered</figcaption>
 		</figure>
 		<p>in order: 0, 2, 3, 3, <strong>4</strong>, 6, 10, 15, 97</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1></h1>
 		<div class='quiz'>
 			<p class='quiz-question'>The mean filter is a spatial filter that replaces the center value in the window with the mean of all the pixel values
@@ -415,25 +566,25 @@
 			</ol>
 		</div>
 		<figure>
-			<img src="assets/Afbeelding10d.png" alt="kernel with unfiltered values">
+			<img src="assets/Afbeelding10d.png " alt="kernel with unfiltered values ">
 			<figcaption>unfiltered values</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding10b.png" alt="kernel to be filled in">
+			<img src="assets/Afbeelding10b.png " alt="kernel to be filled in ">
 			<figcaption>mean filtered</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1></h1>
 		<p class='quiz-question'>The mean filter is a spatial filter that replaces the center value in the window with the mean of all the pixel values
 			in the window. In het case below, we want to know the value after a mean filtering of a single 3x3 window of values below.</p>
 		<figure>
-			<img src="assets/Afbeelding10d.png" alt="kernel with unfiltered values">
+			<img src="assets/Afbeelding10d.png " alt="kernel with unfiltered values ">
 			<figcaption>unfiltered values</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding10e.png" alt="kernel to be filled in">
+			<img src="assets/Afbeelding10e.png " alt="kernel to be filled in ">
 			<figcaption>mean filtered</figcaption>
 		</figure>
 		<ul>
@@ -442,48 +593,60 @@
 		</ul>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>Neighbourhood ranking </strong> median filter</p>
 		<figure>
-			<img src="assets/Afbeelding11.png" alt="original noisy image">
+			<img src="assets/Afbeelding11.png " alt="original noisy image ">
 			<figcaption>original</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding12.png" alt="noisy image with neighbourhood ranking median 3 filter applied">
+			<img src="assets/Afbeelding12.png " alt="noisy image with neighbourhood ranking median 3 filter applied ">
 			<figcaption>filtered</figcaption>
 		</figure>
 		<p>Application of median filtering using a 3×3 square region</p>
+		<p data-view-type="course">Figure 22 shows an extreme example of this type of noise. Ten percent of the pixels in the original image, selected randomly,
+			are set to black, and another ten percent to white. A median filter is able to remove the noise and replace the bad pixels
+			with reasonable values while causing a minimal distortion or degradation of the image. Two different neighbourhoods are
+			used: a 3 × 3 square containing a total of 9 pixels, and a 5 × 5 octagonal (approximately circular) region containing
+			a total of 21 pixels.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>Neighbourhood ranking </strong> median filter</p>
 		<figure>
-			<img src="assets/Afbeelding11.png" alt="original noisy image">
+			<img src="assets/Afbeelding11.png " alt="original noisy image ">
 			<figcaption>original</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding13.png" alt="noisy image with neighbourhood ranking median 5 filter applied">
+			<img src="assets/Afbeelding13.png " alt="noisy image with neighbourhood ranking median 5 filter applied ">
 			<figcaption>filtered</figcaption>
 		</figure>
 		<p>Application of median filtering using a 5×5 octagonal region</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>Neighbourhood ranking </strong> median filter: the time required rises quickly with the number of values to be
 			sorted
 		</p>
 		<figure>
-			<img src="assets/Afbeelding14.png" alt="different size and forms of neighbourhood kernels">
+			<img src="assets/Afbeelding14.png " alt="different size and forms of neighbourhood kernels ">
 			<figcaption>Neighbourhood patterns used for median filtering: (a) 4 nearest-neighbour cross; (b) 3×3 square containing 9 pixels; (c)
 				5×5 octagonal region with 21 pixels; (d) 5×5 square containing 25 pixels; (e) 7×7 octagonal region containing 37 pixels.</figcaption>
 		</figure>
 		<p><strong>Neighbourhood ranking </strong> : other filters: mode filters and many more.</p>
+		<p data-view-type="course">Figure 23 shows several of the neighbourhood regions often used for ranking. The time required rises quickly with the number
+			of values to be sorted, even using specialized methods which keep partial sets of the pixels ranked separately so that
+			as the neighbourhood is moved across the image, only a few additional pixel comparisons are needed (Weiss, 2006). Square
+			neighborhoods are more easily implemented than ones that approximate a circle, but particularly as the size of the neighbourhood
+			is increased the use of a circular pattern is important for producing isotropic results.</p>
+		<p data-view-type="course">Other noise reduction filters exist, like a mode filter (Davies, 1988), the hybrid median, or corner-preserving median
+			(Nieminen et al., 1987). During practice the influence of different filters will be tested. </p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>To reduce noise: </strong></p>
 		<p>Contrast manipulation: </p>
@@ -493,10 +656,14 @@
 				in the image).</li>
 			<li>one-to-one relationship </li>
 		</ul>
-
+		<p data-view-type="course"><strong>Contrast manipulation</strong></p>
+		<p data-view-type="course">Expanding the contrast range by assigning the darkest pixel value to black, the brightest value to white, and each of the
+			others to linearly interpolated shades of gray makes good use of the display and enhances the visibility of features in
+			the image.</p>
+		<p data-view-type="course"></p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>To reduce noise: </strong></p>
 		<p>Contrast manipulation: </p>
@@ -509,7 +676,7 @@
 
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing: noisy images</h1>
 		<p><strong>To reduce noise: </strong></p>
 		<p>Also other methods to remove defects: maximum entropy, maximum likelihood, nonuniform illumination, to perform the fitting
@@ -517,7 +684,7 @@
 			for more info.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>After preparing images for analysis </p>
 		<ul>
@@ -527,7 +694,7 @@
 
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>Thresholding:</p>
 		<ol>
@@ -538,16 +705,16 @@
 		</ol>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>Thresholding:</p>
 		<figure>
-			<img src="assets/Afbeelding15.png" alt="example of thresholding">
+			<img src="assets/Afbeelding15.png " alt="example of thresholding ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>Many thresholding methods exist on the basis of:</p>
 		<ul>
@@ -558,59 +725,59 @@
 		</ul>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>single thresholding</p>
 		<figure>
-			<img src="assets/Afbeelding16.png" alt="example of single thresholding">
+			<img src="assets/Afbeelding16.png " alt="example of single thresholding ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>dual thresholding</p>
 		<figure>
-			<img src="assets/Afbeelding17.png" alt="example of dual thresholding">
+			<img src="assets/Afbeelding17.png " alt="example of dual thresholding ">
 			<figcaption>region growing</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>dual thresholding</p>
 		<figure>
-			<img src="assets/Afbeelding18.png" alt="example of dual thresholding showing all steps">
+			<img src="assets/Afbeelding18.png " alt="example of dual thresholding showing all steps ">
 			<figcaption>region growing</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>dual thresholding</p>
 		<figure>
-			<img src="assets/Afbeelding19.png" alt="example of dual thresholding showing both thresholds">
+			<img src="assets/Afbeelding19.png " alt="example of dual thresholding showing both thresholds ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>threshold</p>
 		<figure>
-			<img src="assets/Afbeelding19a.png" alt="example of dual thresholding showing both thresholds">
-			<figcaption>Fontainebleau Sandstone, Tomographic Images - slice views <a href=" http://www.ams.sunysb.edu/~lindquis/3dma/3dma_rock/3dma_rock.html#Sec_Intro"> 3DMA-Rock </a></figcaption>
+			<img src="assets/Afbeelding19a.png " alt="example of dual thresholding showing both thresholds ">
+			<figcaption>Fontainebleau Sandstone, Tomographic Images - slice views <a href=" http://www.ams.sunysb.edu/~lindquis/3dma/3dma_rock/3dma_rock.html#Sec_Intro "> 3DMA-Rock </a></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>Thresholds in manual and semi-automatic methods are set by the operator interactively so that the resulting image is visually
 			satisfying => not always consistent results</p>
 		<p>Automatic methods</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Image processing</h1>
 		<p>After thresholding, pixels that are erroneously classified as foreground voxels due to noise can be removed by noise reduction,
 			described before or by applying several <strong> binary operations:</strong></p>
@@ -625,21 +792,21 @@
 		</ul>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>AND, OR, XOR, NOT</p>
 		<figure>
-			<img src="assets/Afbeelding20.png" alt="binary boolean operation examples">
+			<img src="assets/Afbeelding20.png " alt="binary boolean operation examples ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding21.png" alt="binary boolean operation examples">
+			<img src="assets/Afbeelding21.png " alt="binary boolean operation examples ">
 			<figcaption>Simple Boolean operations: (a) binary image A; (b) binary image B; (c) A AND B; (d) A OR B; (e) A Ex- OR B; (f) NOT A.
 				(Ex-OR turns a pixel ON in the result if it is ON in either of the original images, but not if it is ON in both).</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<div class='quiz'>
 			<h1class='quiz-question'>Processing a binary image. What is the correct result?</h1>
 				<ol class='quiz-answers'>
@@ -650,108 +817,108 @@
 				</ol>
 		</div>
 		<figure>
-			<img src="assets/Afbeelding22a.png" alt="binary boolean operation on pixel values">
+			<img src="assets/Afbeelding22a.png " alt="binary boolean operation on pixel values ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<figure>
-			<img src="assets/Afbeelding22.png" alt="binary boolean operation on pixel values">
+			<img src="assets/Afbeelding22.png " alt="binary boolean operation on pixel values ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<div class='quiz'>
 			<p class='quiz-question'>What are morphological procedures?</p>
 		</div>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>The most widely used processing operations for binary images are often collectively described as morphological procedures.
 			These include erosion and dilation, and modifications and combinations of these operations.</p>
 		<figure>
-			<img src="assets/Afbeelding23.png" alt="visualization of binary operations">
+			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>An erosion operation can replace each pixel value with the minimum of its own value and the value of its neighbours; dilation
 			does the same but with the maximum value.</p>
 		<figure>
-			<img src="assets/Afbeelding23.png" alt="visualization of binary operations">
+			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>Different erosion methods exist. The simplest kind of erosion is to remove (set to OFF, shown in the examples here as white
 			background) any pixel touching another pixel that is part of the background (is already OFF). This removes a layer of
 			pixels from around the periphery of all features and regions.</p>
 		<figure>
-			<img src="assets/Afbeelding23.png" alt="visualization of binary operations">
+			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<figure>
-			<img src="assets/Afbeelding24.gif" alt="visualization of an erosion operation">
+			<img src="assets/Afbeelding24.gif " alt="visualization of an erosion operation ">
 			<figcaption>Effect of erosion using a 3×3 square structuring element </figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>Dilation: Below a structural element used to dilate corresponding brown stained regions is 3 × 3 used.</p>
 		<figure>
-			<img src="assets/Afbeelding25.png" alt="visualization of a dilation operation">
+			<img src="assets/Afbeelding25.png " alt="visualization of a dilation operation ">
 			<figcaption>Effect of dilation using a 3×3 square structuring element (Mutlu et al., 2009. BMC Bioinformatics 10(11)).</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>The classical dilation rule is to add (set to ON, shown in the examples here as black) any background pixel which touches
 			another pixel that is already part of a foreground region (is already ON)</p>
 		<figure>
-			<img src="assets/Afbeelding23.png" alt="visualization of binary operations">
+			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>This adds a layer of pixels around the periphery of all features and regions, which causes an increase in some dimensions.
 			It also fills in small holes within features.
 		</p>
 		<figure>
-			<img src="assets/Afbeelding23.png" alt="visualization of binary operations">
+			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<ul>
 			<li>An opening operation subsequently performs an erosion and a dilation operation</li>
 			<li>A closing operation subsequently performs first the dilation and then the erosion operation. </li>
 		</ul>
 		<figure>
-			<img src="assets/Afbeelding23.png" alt="visualization of binary operations">
+			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<div class='quiz'>
 			<h1 class='quiz-question'>Which morphological operation was used in this image? </h1>
 			<ol class='quiz-answers'>
@@ -762,22 +929,22 @@
 			</ol>
 		</div>
 		<figure>
-			<img src="assets/Afbeelding26.gif" alt="M">
+			<img src="assets/Afbeelding26.gif " alt="M ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Which morphological operation was used in this image? </h1>
 		<p>Dilation: add (set to ON, shown in the examples here as black) any background pixel (white, off) which touches another
 			pixel that is already part of a foreground region (is already ON).</p>
 		<figure>
-			<img src="assets/Afbeelding26.gif" alt="M">
+			<img src="assets/Afbeelding26.gif " alt="M ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<div class='quiz'>
 			<h1 class='quiz-question'>Which morphological operation was used in this image? </h1>
 			<ol class='quiz-answers'>
@@ -788,22 +955,22 @@
 			</ol>
 		</div>
 		<figure>
-			<img src="assets/Afbeelding27.gif" alt="M">
+			<img src="assets/Afbeelding27.gif " alt="M ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Which morphological operation was used in this image? </h1>
 		<p>Erosion: to remove (set to OFF, shown in the examples here as white background) any pixel touching another pixel that is
 			part of the background (is already OFF).</p>
 		<figure>
-			<img src="assets/Afbeelding27.gif" alt="M">
+			<img src="assets/Afbeelding27.gif " alt="M ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<div class='quiz'>
 			<h1 class='quiz-question'>Which morphological operation was used in the following images?</h1>
 			<ol class='quiz-answers'>
@@ -814,46 +981,46 @@
 			</ol>
 		</div>
 		<figure>
-			<img src="assets/Afbeelding28.gif" alt="M">
+			<img src="assets/Afbeelding28.gif " alt="M ">
 			<figcaption>Figure A</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding29.gif" alt="M">
+			<img src="assets/Afbeelding29.gif " alt="M ">
 			<figcaption>Figure B</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Which morphological operation was used in this image?</h1>
 		<figure>
-			<img src="assets/Afbeelding26.gif" alt="M">
+			<img src="assets/Afbeelding26.gif " alt="M ">
 			<figcaption>Dilation</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding27.gif" alt="M">
+			<img src="assets/Afbeelding27.gif " alt="M ">
 			<figcaption>Erosion</figcaption>
 		</figure>
 		<p>A) Closing (dilation, erosion), B) Opening (erosion, dilation)</p>
 		<figure>
-			<img src="assets/Afbeelding28.gif" alt="M">
+			<img src="assets/Afbeelding28.gif " alt="M ">
 			<figcaption>Figure A</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding29.gif" alt="M">
+			<img src="assets/Afbeelding29.gif " alt="M ">
 			<figcaption>Figure B</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>“Filling holes” turns background pixels completely enclosed by foreground pixels into foreground pixels. </p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Important facts when performing 2D IA:</p>
 		<ul>
@@ -862,12 +1029,12 @@
 			<li>one has to keep in mind that we are dealing with 2D intersects of a 3D volume.</li>
 		</ul>
 		<figure>
-			<img src="assets/Afbeelding30.png" alt="intersect of a plane with 3D objects">
+			<img src="assets/Afbeelding30.png " alt="intersect of a plane with 3D objects ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Important facts when performing 2D IA:</p>
 		<ul>
@@ -876,12 +1043,12 @@
 			<li>It is primarily a geometrical and statistical science.</li>
 		</ul>
 		<figure>
-			<img src="assets/Afbeelding30.png" alt="intersect of a plane with 3D objects">
+			<img src="assets/Afbeelding30.png " alt="intersect of a plane with 3D objects ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>By 2D IA on single features many parameters can be determined:</p>
 		<ul>
@@ -891,7 +1058,7 @@
 		</ul>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Counting the number of objects that are present in an image or field of view. </p>
 		<ul>
@@ -901,14 +1068,14 @@
 		</ul>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p><strong>Counting the number of objects:</strong></p>
 		<p>When FOV is a sample of entire structure, which extends beyond the bounds of the image: result for the number of objects
 			is generally given as number per unit area.</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p><strong>Counting the number of objects:</strong></p>
 		<p>When objects intersect the edge of FOV, it is not proper to count all of those objects that can be seen</p>
@@ -917,16 +1084,16 @@
 		<p>=> area reported for the measurement is the area within the counting frame, not the entire area of the image!</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Counting the number of objects: (also allows to measure their area)</p>
 		<figure>
-			<img src="assets/Afbeelding31.png" alt="counting of objects visualised">
+			<img src="assets/Afbeelding31.png " alt="counting of objects visualised ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Second method to determine area of objects:</p>
 		<ul>
@@ -936,7 +1103,7 @@
 		</ul>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>The adjusted count for each feature is calculated as follows: </p>
 		<ul>
@@ -945,21 +1112,21 @@
 		<p>Wx and Wy: dimensions of image in x and y directions</p>
 		<p>Fx and Fy are maximum projected dimensions of the feature in those directions</p>
 		<figure>
-			<img src="assets/Afbeelding32.png" alt="object in FOV with measuremnts needed for counting adjustment">
+			<img src="assets/Afbeelding32.png " alt="object in FOV with measuremnts needed for counting adjustment ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Aim/problem: count features that are touching each other</p>
 		<figure>
-			<img src="assets/Afbeelding33.png" alt="binary image of touching objects">
+			<img src="assets/Afbeelding33.png " alt="binary image of touching objects ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Aim/problem: count features that are touching each other</p>
 		<p>short-cut method: make Euclidean distance map (EDM)= distance transform = a derived representation of a digital image.
@@ -967,30 +1134,30 @@
 			image).
 		</p>
 		<figure>
-			<img src="assets/Afbeelding34.png" alt="distance transform of a binary image">
+			<img src="assets/Afbeelding34.png " alt="distance transform of a binary image ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Aim/problem: count features that are touching each other</p>
 		<p>short-cut method: make Euclidean distance map (EDM) and use watershed segmentation</p>
 		<figure>
-			<img src="assets/Afbeelding37.png" alt="binary image of touching objects">
+			<img src="assets/Afbeelding37.png " alt="binary image of touching objects ">
 			<figcaption>binary image of touching circles</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding35.png" alt="euclidean distance map of touching objects">
+			<img src="assets/Afbeelding35.png " alt="euclidean distance map of touching objects ">
 			<figcaption>Euclidean distance map (colour indicates distance of pixel from nearest background point)</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding36.png" alt="watershed separation result of touching objects">
+			<img src="assets/Afbeelding36.png " alt="watershed separation result of touching objects ">
 			<figcaption>the watershed separation result</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Watershed separation:</p>
 		<ul>
@@ -1000,54 +1167,54 @@
 				exactly one unique basin.</li>
 		</ul>
 		<figure>
-			<img src="assets/Afbeelding38.png" alt="watershed separation">
+			<img src="assets/Afbeelding38.png " alt="watershed separation ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Watershed separation:</p>
 		<figure>
-			<img src="assets/Afbeelding38.png" alt="watershed separation">
+			<img src="assets/Afbeelding38.png " alt="watershed separation ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding39.png" alt="linked circles">
+			<img src="assets/Afbeelding39.png " alt="linked circles ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding40.png" alt="watershed separation">
+			<img src="assets/Afbeelding40.png " alt="watershed separation ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding42.png" alt="watershed separation">
+			<img src="assets/Afbeelding42.png " alt="watershed separation ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Watershed separation:</p>
 		<figure>
-			<img src="assets/Afbeelding38.png" alt="watershed separation">
+			<img src="assets/Afbeelding38.png " alt="watershed separation ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding43.png" alt="linked circles">
+			<img src="assets/Afbeelding43.png " alt="linked circles ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding44.png" alt="watershed separation">
+			<img src="assets/Afbeelding44.png " alt="watershed separation ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding45.png" alt="watershed separated circles">
+			<img src="assets/Afbeelding45.png " alt="watershed separated circles ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<ul>
 			<li>The most basic measure of the size of objects = the area.</li>
@@ -1057,25 +1224,25 @@
 		</ul>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Below an image of spherical particles dispersed on a flat substrate. </p>
 		<p>The diameters can be measured (when enough pixels in each feature are present to give a precise measure of its size)</p>
 		<figure>
-			<img src="assets/Afbeelding46.png" alt="spheres on a flat surface">
+			<img src="assets/Afbeelding46.png " alt="spheres on a flat surface ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding47.png" alt="spheres on a flat surface detail">
+			<img src="assets/Afbeelding47.png " alt="spheres on a flat surface detail ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding48.png" alt="spheres on a flat surface deatail in binary">
+			<img src="assets/Afbeelding48.png " alt="spheres on a flat surface deatail in binary ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Particles cover a large size range</p>
 		<ul>
@@ -1084,44 +1251,44 @@
 				the same time. </li>
 		</ul>
 		<figure>
-			<img src="assets/Afbeelding46.png" alt="spheres on a flat surface">
+			<img src="assets/Afbeelding46.png " alt="spheres on a flat surface ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding47.png" alt="spheres on a flat surface detail">
+			<img src="assets/Afbeelding47.png " alt="spheres on a flat surface detail ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding48.png" alt="spheres on a flat surface deatail in binary">
+			<img src="assets/Afbeelding48.png " alt="spheres on a flat surface deatail in binary ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Multiple sets of data taken at several magnifications are required.</p>
 		<p>When measurements are made at different magnifications, the proper procedure for combining them is on a per-unit-area basis.
 			Just measuring the same number of pictures at each magnification produces an incorrect result because, at the higher magnification,
 			a much smaller area is covered.</p>
 		<figure>
-			<img src="assets/Afbeelding46.png" alt="spheres on a flat surface">
+			<img src="assets/Afbeelding46.png " alt="spheres on a flat surface ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding47.png" alt="spheres on a flat surface detail">
+			<img src="assets/Afbeelding47.png " alt="spheres on a flat surface detail ">
 			<figcaption></figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding48.png" alt="spheres on a flat surface deatail in binary">
+			<img src="assets/Afbeelding48.png " alt="spheres on a flat surface deatail in binary ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Three possible measures for feature area: (a) net (8529 pixels); (b) filled (9376 pixels); (c) convex (11227 pixels).</p>
 		<figure>
-			<img src="assets/Afbeelding49.png" alt="three measures for an objects area">
+			<img src="assets/Afbeelding49.png " alt="three measures for an objects area ">
 			<figcaption></figcaption>
 		</figure>
 		<p>Once the area has been determined, it is often convenient to express it as the equivalent circular diameter. This is a
@@ -1129,90 +1296,90 @@
 		<p>√(area.4/π)</p>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<figure>
-			<img src="assets/Afbeelding50.png" alt="other measures for an objects size">
+			<img src="assets/Afbeelding50.png " alt="other measures for an objects size ">
 			<figcaption>Comparison of the bounding polygon (red), the longest chord (yellow), and equivalent area circle for an irregular feature.</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>an irregular feature with several measures of size:</p>
 		<figure>
-			<img src="assets/Afbeelding55a.png" alt="irregular shape with measures of size">
+			<img src="assets/Afbeelding55a.png " alt="irregular shape with measures of size ">
 			<figcaption>original binary feature with its convex hull (orange)</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>an irregular feature with several measures of size:</p>
 		<figure>
-			<img src="assets/Afbeelding55b.png" alt="irregular shape with measures of size">
+			<img src="assets/Afbeelding55b.png " alt="irregular shape with measures of size ">
 			<figcaption>minimum circumscribed circle (red), maximum inscribed circle (green), maximum inscribed circle ignoring internal voids
 				(blue)
 			</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>an irregular feature with several measures of size:</p>
 		<figure>
-			<img src="assets/Afbeelding55c.png" alt="irregular shape with measures of size">
+			<img src="assets/Afbeelding55c.png " alt="irregular shape with measures of size ">
 			<figcaption>minimum (magenta) and maximum (green) caliper dimensions (note that they are not perpendicular) (caliper = distance between
 				two opposite sides of an object)</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>an irregular feature with several measures of size:</p>
 		<figure>
-			<img src="assets/Afbeelding55d.png" alt="irregular shape with measures of size">
+			<img src="assets/Afbeelding55d.png " alt="irregular shape with measures of size ">
 			<figcaption>equivalent area circles for the net area (green), filled area (red), and convex hull (blue), each one positioned on the
 				centroid of the corresponding area</figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<figure>
-			<img src="assets/Afbeelding55.png" alt="irregular shape with measures of size">
+			<img src="assets/Afbeelding55.png " alt="irregular shape with measures of size ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>representative shape descriptors</p>
 		<figure>
-			<img src="assets/Afbeelding56.png" alt="representative shap decriptors">
+			<img src="assets/Afbeelding56.png " alt="representative shap decriptors ">
 			<figcaption></figcaption>
 		</figure>
 	</section>
 
-	<section class="slide" data-level="0">
+	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<p>Represntative shape descriptors</p>
 		<p>Form factor:</p>
 		<figure>
-			<img src="assets/Afbeelding57.png" alt="shapes with increasing circumference">
+			<img src="assets/Afbeelding57.png " alt="shapes with increasing circumference ">
 			<figcaption>The shapes have the same area, but the increasing perimeter changes the measured formfactor.</figcaption>
 		</figure>
 		<figure>
-			<img src="assets/Afbeelding58.png" alt="shapes with identical formfactor">
+			<img src="assets/Afbeelding58.png " alt="shapes with identical formfactor ">
 			<figcaption>shapes with an equal formfactor</figcaption>
 		</figure>
 	</section>
 
-	<div class="progress"></div>
-	<footer class="badge">
-		<a href="https://github.com/shower/shower">Fork me on GitHub</a>
+	<div class="progress "></div>
+	<footer class="badge ">
+		<a href="https://github.com/shower/shower ">Fork me on GitHub</a>
 	</footer>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/shower-core/2.1.0/shower.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/shower-core/2.1.0/shower.min.js "></script>
 	<!-- Copyright © 2016 Yours Truly, Famous Inc. -->
 
 </body>
