@@ -660,7 +660,21 @@
 		<p data-view-type="course">Expanding the contrast range by assigning the darkest pixel value to black, the brightest value to white, and each of the
 			others to linearly interpolated shades of gray makes good use of the display and enhances the visibility of features in
 			the image.</p>
-		<p data-view-type="course"></p>
+		<p data-view-type="course">A typical computer display can show 28 or 256 different shades of gray and can produce colours with the same 28 brightness
+			values for each of the red, green, and blue components to produce a total of 224 or 16 million different colours. This
+			is often described as “true colour,” since the colours that can be displayed are adequate to represent most natural scenes.
+			It does not imply, of course, that the colours displayed are photometrically accurate or identical to the original colour
+			in the scene, or that the display is capable of showing the full gamut of colours that the eye can perceive or the camera
+			capture. That is very difficult and requires special hardware and calibration. If the original image has more than 256
+			brightness values (is more than 8 bits deep) in each colour channel, some type of lookup table is required even to display
+			it on the screen. More important, the 16 million different colours that such a system is capable of displaying, and even
+			the 256 shades of gray, provide a finer gradation than the human eye can distinguish. Under good viewing conditions, humans
+			can typically distinguish only a few tens of different gray levels and a few hundreds of distinguishable colours. Consequently,
+			the display hardware of the image processing system is not being used very well to communicate the image information to
+			the user. If many of the pixels in the image are bright, for example, they cannot be distinguished. If there are also
+			some dark pixels present, it is not possible to just linearly expand the contrast. Instead, a more complicated relationship
+			between stored and displayed values is needed.</p>
+
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -673,7 +687,12 @@
 				visual difference.</li>
 			<li>A nonlinear relationship can expand one portion of the gray scale range while compressing another.</li>
 		</ul>
-
+		<p data-view-type="course">The manipulation of pixel brightness can be described in terms of a transfer function relating the stored brightness value
+			for each pixel to a displayed value. If this relationship is one-to-one, then for each stored value there is be a corresponding
+			and unique (although not necessarily visually discernible) displayed value. In some cases, it is advantageous or necessary
+			to use transfer functions that are not one-to-one: several stored values are displayed with the same brightness value,
+			so that other stored values can be spread further apart to increase their visual difference. A nonlinear relationship
+			can expand one portion of the gray scale range while compressing another. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -682,6 +701,10 @@
 		<p>Also other methods to remove defects: maximum entropy, maximum likelihood, nonuniform illumination, to perform the fitting
 			of a background function, to perform alignment, to perform edge enhancement, etc…. Check Russ, Image J and literature
 			for more info.</p>
+		<p data-view-type="course">Additionally, there also exist image processing methods to remove defects, maximum entropy, maximum likelihood, nonuniform
+			illumination, to perform the fitting of a background function, to perform alignment, to perform edge enhancement, etc….
+			More information can be found in the Image processing handbook of Russ and in the help function of ImageJ, which will
+			be used for image processing and 2D image analysis during practice.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -691,7 +714,8 @@
 			<li>selection of objects within an image which need to be analysed</li>
 			<li>=> THRESHOLDING/SEGMENTATION</li>
 		</ul>
-
+		<p data-view-type="course">After preparing the images for analysis the next step is the selection of the objects or features within an image which
+			need to be analysed.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -703,6 +727,10 @@
 			<li>reject all the other pixels to the background</li>
 			<li>=> binary image using black and white to distinguish the regions</li>
 		</ol>
+		<p data-view-type="course">Traditionally, a simple way to accomplish this is to define a range of brightness values in the original image, select
+			the pixels within this range as belonging to the foreground, and reject all the other pixels to the background. Such an
+			image is then usually displayed as a binary image using black and white to distinguish the regions (fig. 24b). This process
+			is called thresholding and is used to separate the phase or material of interest from the rest of the volume.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -723,6 +751,8 @@
 			<li>textural differences</li>
 			<li>other meaningful criteria</li>
 		</ul>
+		<p data-view-type="course">Many thresholding methods exist on the basis of gray-level, colour separation, textural differences, or other meaningful
+			criteria. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -732,6 +762,9 @@
 			<img src="assets/Afbeelding16.png " alt="example of single thresholding ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">Many thresholding methods exist. With a single threshold, all values within a certain grayscale interval are converted
+			into foreground pixels. This interval can be manually selected or calculated automatically by using Otsu’s method (Otsu,
+			1979). </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -750,6 +783,11 @@
 			<img src="assets/Afbeelding18.png " alt="example of dual thresholding showing all steps ">
 			<figcaption>region growing</figcaption>
 		</figure>
+		<p data-view-type="course">Dual thresholding uses two intervals; pixels with a gray value in the first interval are classified as foreground pixels,
+			while pixels in the second interval are only defined as foreground pixels if they are connected to pixels from the first
+			interval. This approach reduces the sensitivity to residual image noise. It is not always necessary to threshold the image
+			in order to make measurements such as determining the area fraction of each structure. Histogram analysis may be done
+			by fitting Gaussian (or other shape) functions to the histogram.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -768,6 +806,19 @@
 			<img src="assets/Afbeelding19a.png " alt="example of dual thresholding showing both thresholds ">
 			<figcaption>Fontainebleau Sandstone, Tomographic Images - slice views <a href=" http://www.ams.sunysb.edu/~lindquis/3dma/3dma_rock/3dma_rock.html#Sec_Intro "> 3DMA-Rock </a></figcaption>
 		</figure>
+		<p data-view-type="course">Like described before, are manual adjustment of thresholds to produce a result that is considered to be correct based on
+			visual inspection by a human operator common, but in most cases this should be avoided. In addition to taking time and
+			being incompatible with automatic processing, different results are likely to be obtained at different times or by different
+			people. Therefore, manual thresholding errors are probably responsible for more problems in subsequent image analysis
+			than any other cause.</p>
+		<p data-view-type="course">A number of algorithms have been developed for automating the thresholding procedure. Some of them, primarily used in machine
+			vision setups for industrial quality control, are more concerned with reproducibility than with absolute accuracy. Most
+			of the automatic methods utilize the histogram in their calculations, but some also make use of the location information
+			for the pixels (and their neighbours). All automatic methods make some assumptions about the nature of the image, and
+			in order to choose the proper algorithm it is important to know as much as possible about the nature of the image, how
+			it was acquired, and what kinds of scenes or subjects are dealt with. An excellent summary of the more widely used methods
+			can be found in Parker (1997), Yager (1979), Otsu (1979), Trussell (1979), and a comprehensive survey of all techniques
+			is available in Sezgin & Sankur (2004). </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -775,6 +826,13 @@
 		<p>Thresholds in manual and semi-automatic methods are set by the operator interactively so that the resulting image is visually
 			satisfying => not always consistent results</p>
 		<p>Automatic methods</p>
+		<p data-view-type="course">Thresholds in manual and semi-automatic methods are set by the operator interactively, so that the resulting image is visually
+			satisfying. However, because the human eye is poor in intensity discrimination, the result is not always consistent from
+			one operator to another or even for the same person over a period of time. Other methods use the image intensity histogram
+			to adjust threshold settings automatically and give more reproducible results. In addition, depending on their quality,
+			images are regularly subjected to some filtering before segmentation and correction procedures (including binary operations
+			like opening and closing, and methods like watershed separation) (fig. 24b, c) are often applied to segmented images (Bovik
+			et al., 2001; Russ, 2002). </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -790,6 +848,10 @@
 			<li>Closing</li>
 			<li>Hole filling</li>
 		</ul>
+		<p data-view-type="course">After thresholding, pixels that are erroneously classified as foreground voxels due to noise can be removed by applying
+			several binary operations: removal of isolated foreground or background voxels (pixels are isolated if they are not connected
+			to a voxel of the same binary value), eroding, dilating, opening, closing, and hole filling (Soille, 1999). For more info
+			read literature on “processing binary image”. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -801,9 +863,19 @@
 		</figure>
 		<figure>
 			<img src="assets/Afbeelding21.png " alt="binary boolean operation examples ">
-			<figcaption>Simple Boolean operations: (a) binary image A; (b) binary image B; (c) A AND B; (d) A OR B; (e) A Ex- OR B; (f) NOT A.
-				(Ex-OR turns a pixel ON in the result if it is ON in either of the original images, but not if it is ON in both).</figcaption>
+			<figcaption>(fig. 25) Simple Boolean operations: (a) binary image A; (b) binary image B; (c) A AND B; (d) A OR B; (e) A Ex- OR B;
+				(f) NOT A. (Ex-OR turns a pixel ON in the result if it is ON in either of the original images, but not if it is ON in
+				both).
+			</figcaption>
 		</figure>
+		<p data-view-type="course"><strong>Processing a binary image</strong></p>
+		<p data-view-type="course">After thresholding, a binary image is created, but often this image is not perfect for the aimed analysis of the features
+			in the image, since often some pixels are misclassified as foreground or background. The major tools for working with
+			binary images to correct the thresholding errors fit broadly into two groups: Boolean operations for combining images
+			and morphological operations that modify individual images within an image. It is of course also possible to combine Boolean
+			operations. </p>
+		<p data-view-type="course">The four principal possibilities of Boolean operations are AND, OR, Ex-OR (Exclusive OR, often abbreviated as XOR) and
+			NOT. Figure 25 illustrates each of these basic operations, which will be tested during practice.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -845,6 +917,9 @@
 			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">The most widely used processing operations for binary images are often collectively described as morphological procedures
+			(Serra, 1982; Coster & Chermant, 1985; Dougherty & Astola, 1994, 1999; Soille, 1999; Shih, 2009). These include erosion
+			and dilation, and modifications and combinations of these operations. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -855,6 +930,8 @@
 			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course"> An erosion operation can replace each pixel value with the minimum of its own value and the value of its neighbours; dilation
+			does the same but with the maximum value.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -914,8 +991,12 @@
 		</ul>
 		<figure>
 			<img src="assets/Afbeelding23.png " alt="visualization of binary operations ">
-			<figcaption></figcaption>
+			<figcaption>(fig. 26)</figcaption>
 		</figure>
+		<p data-view-type="course">An opening operation subsequently performs an erosion and a dilation operation (fig. 26). In the case of a closing operation,
+			first the dilation and then the erosion operation are executed (fig. 26). As a result of an opening operation, all sets
+			of foreground pixels for which the smallest dimension is smaller than a certain chosen value are removed. The same will
+			happen for sets of background pixels after a closing operation.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1014,6 +1095,8 @@
 	<section class="slide " data-level="0 ">
 		<h1>Processing a binary image</h1>
 		<p>“Filling holes” turns background pixels completely enclosed by foreground pixels into foreground pixels. </p>
+		<p data-view-type="course">“Filling holes” turns background pixels completely enclosed by foreground pixels into foreground pixels. All these binary
+			operations will be tested during practice. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1030,8 +1113,18 @@
 		</ul>
 		<figure>
 			<img src="assets/Afbeelding30.png " alt="intersect of a plane with 3D objects ">
-			<figcaption></figcaption>
+			<figcaption>(fig. 27)</figcaption>
 		</figure>
+		<p data-view-type="course">Many published papers in all fields of science, particularly ones that use microscopy, include images with the caption
+			“representative microstructure” or “typical structure,” and in no case is this likely to be true. Either the particular
+			image selected has been chosen because it shows most clearly some feature of the structure that the author believes is
+			important, or it displays the best qualities of specimen preparation and image contrast, or some other characteristic
+			that makes it (almost by definition) non-typical. In most real structures, there is no such thing as one typical field
+			of view in a true statistical sense. That is why it is important to collect many images from multiple fields of view,
+			spread throughout the specimen in a randomized and unbiased way. </p>
+		<p data-view-type="course"> When performing digital analysis on 2D thin sections, one has to keep in mind that we are dealing with 2D intersects of
+			a 3D volume. As shown in Figure 27, a section plane that intersects a volume shows an area, while an intersection with
+			a surface generates a line, and an intersection with a linear structure presents a point. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1046,6 +1139,15 @@
 			<img src="assets/Afbeelding30.png " alt="intersect of a plane with 3D objects ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course"> By measuring and counting these “events”, the provided raw data needs to be interpreted to deliver estimates of the three-dimensional
+			structures themselves. One method to this, is called “stereology”. The science of stereology relates the measurements
+			that can be performed on two-dimensional images to the three-dimensional structures that are represented and sampled by
+			those images. It is primarily a geometrical and statistical science, whose most widely used rules and calculations have
+			a deceptive simplicity. Guides to modern stereological methods can be found in Russ & Dehoff (2001), Mouton (2002), Mandarim-de-Lacerda
+			(2003), Glaser et al. (2007), while classical methods are described in Underwood (1970), Weibel (1979), Russ (1986), Hilliard
+			& Lawson (2003), Schneider & Weil (2008). The key to understanding stereological measurements is the relationship between
+			a three-dimensional structure and a two-dimensional section through it, as used in many types of microscopy for examining
+			materials and biological specimens.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1066,6 +1168,10 @@
 			<li>concept seems entirely straightforward, but often wrongly performed.</li>
 			<li>Problem: the finite bounds of the FOV.</li>
 		</ul>
+		<p data-view-type="course">When performing 2D image analysis on single features in an image, many parameters can be determined. Counting the number
+			of objects or features that are present in an image or field of view is one of the most common procedures in image analysis.
+			The concept seems entirely straightforward, and it is surprising how many programs get it wrong. The problem has to do
+			with the finite bounds of the field of view. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1073,6 +1179,11 @@
 		<p><strong>Counting the number of objects:</strong></p>
 		<p>When FOV is a sample of entire structure, which extends beyond the bounds of the image: result for the number of objects
 			is generally given as number per unit area.</p>
+		<p data-view-type="course">In the case in which the entire field of interest is within the image, there is little difficulty. Determining whether
+			or not it is appropriate to count features that lie inside other features depends on the particular application, and consequently
+			must be left up to the user.</p>
+		<p data-view-type="course">When the field of view is a sample of the entire structure, which extends beyond the bounds of the image, the result for
+			the number of features or objects is generally given as number per unit area. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1082,6 +1193,19 @@
 		<p>=> solution: count those features that touch 2 adjacent edges, f.i. top and left, and ignore those that touch other 2 edges,
 			f.i. right and bottom</p>
 		<p>=> area reported for the measurement is the area within the counting frame, not the entire area of the image!</p>
+		<p data-view-type="course">When features intersect the edge of the field of view, it is not proper to count all of the features that can be seen.
+			The most common solution to produce an unbiased result is to count those features that touch two adjacent edges, for instance
+			the top and left, and to ignore those that touch the other two edges, for instance the right and bottom.</p>
+		<p data-view-type="course">This is equivalent to counting each feature by its lower right corner. Since each feature has one and only one lower right
+			corner, counting those points is equivalent to counting the features. The convention of counting features that touch two
+			edges only is not implemented in all systems.</p>
+		<p data-view-type="course">Some software packages offer a choice of counting all features regardless of edge touching, or counting only those features
+			that do not touch any edge. Both are incorrect. When measuring objects, as opposed to counting them, a more complicated
+			procedure is needed. A feature that intersects any edge cannot be measured, because it is not all imaged and therefore
+			no size, shape, or position information can be correctly obtained. If only the features in Figure 28 that do not touch
+			any edge are counted, the proportions of large and small features are wrong. It is more likely for a large object to touch
+			an edge, and so a disproportionate fraction of the large features intersect an edge of the field of view and are not measured.
+			There are two ways to correct for this bias. They produce the same result, but are implemented differently.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1089,8 +1213,17 @@
 		<p>Counting the number of objects: (also allows to measure their area)</p>
 		<figure>
 			<img src="assets/Afbeelding31.png " alt="counting of objects visualised ">
-			<figcaption></figcaption>
+			<figcaption>(fig. 29)</figcaption>
 		</figure>
+		<p data-view-type="course">The older method, which was used originally for manual measurements on photographic prints, sets up a “guard frame” within
+			the image, as shown in Figure 29. Features that touch the lower and right edges of the field of view are not counted or
+			measured, as before. Features that cross the top and left edges of the guard frame are counted and measured in their entirety.</p>
+		<p data-view-type="course">The number of features or objects counted is then an accurate and unbiased measure of the number per unit area, but the
+			area reported for the measurement is the area within the counting frame, not the entire area of the image. This is exactly
+			equivalent to the “lower right corner” method shown above for counting, but also permits measurements to be made on the
+			objects. Since it is necessary for the guard region to be wide enough that no feature can extend from within the active
+			region across the guard region to the edge of the field, the active region may be reduced significantly compared to the
+			total image area.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1101,6 +1234,10 @@
 			<li>To compensate for bias (larger features are more likely to touch the edge) features are counted in proportion to the likelihood
 				that a feature of that particular size and shape would be likely to touch the edge of a randomly placed field of view.</li>
 		</ul>
+		<p data-view-type="course">The second method uses the entire image area and measures all of those features that do not touch any of the edges. In
+			order to compensate for the bias arising from the fact that larger features are more likely to touch the edge and be bypassed
+			in the measurement process, features are counted in proportion to the likelihood that a feature of that particular size
+			and shape would be likely to touch the edge of a randomly placed field of view.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1113,8 +1250,18 @@
 		<p>Fx and Fy are maximum projected dimensions of the feature in those directions</p>
 		<figure>
 			<img src="assets/Afbeelding32.png " alt="object in FOV with measuremnts needed for counting adjustment ">
-			<figcaption></figcaption>
+			<figcaption>(fig. 30)</figcaption>
 		</figure>
+		<p data-view-type="course">The adjusted count for each feature is calculated, as shown in Figure 30, as:</p>
+		<p data-view-type="course">Equation A:</p>
+		<p data-view-type="course">Count==(Wx.Wy)/((Wx-Fx ).(Wy-Fy ) )</p>
+		<p data-view-type="course">where Wx and Wy are the dimensions of the image in the x and y directions, and Fx and Fy are the maximum projected dimensions
+			of the feature in those directions. The F values are the same bounding-box coordinates used for finding a feature’s location.
+			When the feature dimensions are small compared to the dimensions of the field of view, the fraction is nearly 1.0 and
+			counting is little affected. When the feature extends across a larger fraction of the field of view in either direction,
+			it is more likely that a random placement of the field of view on the sample would cause it to intersect an edge; thus
+			the features that can be measured must be counted as more than one to correct for those that have been eliminated. The
+			adjusted count factor makes that compensation.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1137,6 +1284,10 @@
 			<img src="assets/Afbeelding34.png " alt="distance transform of a binary image ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">If the purpose of the processing and segmentation is to count features that are touching each other, like in Figure 31A,
+			there is a short-cut method that saves much of the computation. By making an Euclidean distance map (EDM), where every
+			local maximum point (pixels equal to or greater than all eight of their neighbours) is a unique point that represents
+			one feature, these features can be separated by a watershed segmentation.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1222,6 +1373,13 @@
 			<li>The size of an object in a 2D image may be related to the size of the corresponding object in 3D space in various ways,
 				depending on how the image is obtained.</li>
 		</ul>
+		<p data-view-type="course">The most basic measure of the size of objects in images is simply the area. For a pixel-based representation, this is the
+			number of pixels within the feature, which is determined by counting.</p>
+		<p data-view-type="course">The size of an object in a two-dimensional image may be related to the size of the corresponding object in three-dimensional
+			space in various ways, depending on how the image is obtained.</p>
+		<p data-view-type="course">The most common type of images are projections, in which the features show the outer dimensions of the objects, or planar
+			sections, in which the features are slices across the objects. In the latter case, it is possible to estimate the volume
+			of the objects using stereological methods. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1230,7 +1388,7 @@
 		<p>The diameters can be measured (when enough pixels in each feature are present to give a precise measure of its size)</p>
 		<figure>
 			<img src="assets/Afbeelding46.png " alt="spheres on a flat surface ">
-			<figcaption></figcaption>
+			<figcaption>(fig. 32)</figcaption>
 		</figure>
 		<figure>
 			<img src="assets/Afbeelding47.png " alt="spheres on a flat surface detail ">
@@ -1240,6 +1398,9 @@
 			<img src="assets/Afbeelding48.png " alt="spheres on a flat surface deatail in binary ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">Figure 32 shows an image of spherical particles dispersed on a flat substrate. The diameters can be measured straightforwardly
+			from such an image subject to the usual restriction that there must be enough pixels in each feature to give a precise
+			measure of its size. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1262,6 +1423,9 @@
 			<img src="assets/Afbeelding48.png " alt="spheres on a flat surface deatail in binary ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">When the particles cover a large size range, as they do in this image, this creates a problem. The smallest features are
+			only one or a few pixels in size and are not well defined (in fact, some may not even be thresholded). A high resolution
+			camera or the combination of multiple images is needed to image both the large and small features at the same time.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1282,6 +1446,12 @@
 			<img src="assets/Afbeelding48.png " alt="spheres on a flat surface deatail in binary ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">Even the high resolution digital camera does not provide enough pixels to accurately measure the smallest particles in
+			this case. One solution is to increase the optical magnification to enlarge the small particles, but then the large ones
+			are likely to intersect the edges of the screen so that they cannot be measured. Multiple sets of data taken at several
+			magnifications are required. When measurements are made at different magnifications, the proper procedure for combining
+			them is on a per-unit-area basis. Just measuring the same number of pictures at each magnification produces an incorrect
+			result because, at the higher magnification, a much smaller area is covered.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1294,14 +1464,35 @@
 		<p>Once the area has been determined, it is often convenient to express it as the equivalent circular diameter. This is a
 			linear size measure, calculated from the area as:</p>
 		<p>√(area.4/π)</p>
+		<p data-view-type="course">Even for such a simple idea as counting pixels to determine feature area, some decisions must be made. For instance, consider
+			the feature shown diagrammatically in Figure 33. Should the pixels within internal holes be included in the area or not?
+			Of course, this depends on the intended use of the data. If the hole is a section through an internal void in an object,
+			then it should be included if the area of the feature is to be related to the object volume, but not if the area is to
+			be related to the object mass. But it is hard to know whether the hole may be a section through a surface indentation
+			in that object, in which case it would be more consistent to also include in the area those pixels in indentations around
+			the feature boundary. As shown in the figure, this produces three different possible area measurements, the net area,
+			the filled area, and the convex area. Measuring the first two can be accomplished as a simple pixel-counting exercise.
+			In the process of labeling the pixels that touch each other and comprise the feature, the presence of internal holes can
+			be detected and the pixels within them counted. These pixels can be added back to the original image to fill in the holes,
+			if desired. Determining whether to include those pixels in the area then becomes a user decision based on other knowledge.</p>
+		<p data-view-type="course">Determining the convex area is a slightly more difficult calculation. In some cases, a combination of dilation and erosion
+			steps can be used to construct a convex hull for the feature and fill any boundary irregularities, so that pixel counting
+			can be used to determine the area. However, on a square pixel grid these methods can cause some distortions of the feature
+			shape.
+		</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
 		<h1>2D image analysis</h1>
 		<figure>
 			<img src="assets/Afbeelding50.png " alt="other measures for an objects size ">
-			<figcaption>Comparison of the bounding polygon (red), the longest chord (yellow), and equivalent area circle for an irregular feature.</figcaption>
+			<figcaption>(fig. 34) Comparison of the bounding polygon (red), the longest chord (yellow), and equivalent area circle for an irregular
+				feature.
+			</figcaption>
 		</figure>
+		<p data-view-type="course">Figure 34 shows several features of different sizes and shapes with the equivalent circle diameter shown based on the net
+			feature area (pixel count). Features of different shape or orientation can fool the eye and make it difficult to judge
+			relative size. The equivalent diameter values offer an easily compared parameter to characterize size.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1350,6 +1541,18 @@
 			<img src="assets/Afbeelding55.png " alt="irregular shape with measures of size ">
 			<figcaption></figcaption>
 		</figure>
+		<p data-view-type="course">Circles are often used to represent size, because the diameter provides a convenient linear measure that ignores any details
+			of shape. Besides the equivalent circle with the same area as the feature, the inscribed or circumscribed circle may be
+			used (Figure 35). The circumscribed circle is determined by using the corners of the bounding polygon, sorting through
+			them to find the two or three that define the circle that encloses all of the others (a concise algorithm for finding
+			the circle can be found in Arvo, 1991). The inscribed circle is defined by the maximum value of the Euclidean distance
+			map of the feature; the maximum pixel marks the center and its value gives the radius.</p>
+		<p data-view-type="course">Since most real features have irregular shapes, it is not easy to find size measures that compactly and robustly describe
+			them and allow for their classification and comparison. The use of an equivalent circular diameter is one attempt. Recognizing
+			that not all features are equiaxed or evenly approximately round, an ellipse may also be used to represent the feature.
+			The fact that the ellipse has two axes allows describing a size, a degree of departure from circularity, and even an orientation
+			that can be useful in some applications. The major and minor axes of the ellipse may be determined in several different
+			ways, however.</p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1357,8 +1560,11 @@
 		<p>representative shape descriptors</p>
 		<figure>
 			<img src="assets/Afbeelding56.png " alt="representative shap decriptors ">
-			<figcaption></figcaption>
+			<figcaption>(fig. 36)</figcaption>
 		</figure>
+		<p data-view-type="course">Other parameters can be determined including the maximum caliper or maximum Feret’s diameter, an object’s length, the perimeter,
+			as well as trying to describe the shape. Figure 36 represents some shape factors, while Figure 37 and 38 illustrate how
+			an object can look like with similar or different formfactors. </p>
 	</section>
 
 	<section class="slide " data-level="0 ">
@@ -1367,12 +1573,15 @@
 		<p>Form factor:</p>
 		<figure>
 			<img src="assets/Afbeelding57.png " alt="shapes with increasing circumference ">
-			<figcaption>The shapes have the same area, but the increasing perimeter changes the measured formfactor.</figcaption>
+			<figcaption>(fig. 37) The shapes have the same area, but the increasing perimeter changes the measured formfactor.</figcaption>
 		</figure>
 		<figure>
 			<img src="assets/Afbeelding58.png " alt="shapes with identical formfactor ">
-			<figcaption>shapes with an equal formfactor</figcaption>
+			<figcaption>(fig. 38) shapes with an equal formfactor</figcaption>
 		</figure>
+		<p data-view-type="course">Figure 36 represents some shape factors, while Figure 37 and 38 illustrate how an object can look like with similar or
+			different formfactors. </p>
+
 	</section>
 
 	<div class="progress "></div>
